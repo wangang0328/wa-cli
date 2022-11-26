@@ -1,16 +1,20 @@
 {
-  "name": "@wa/cli-shared-utils",
+  "name": "@wa-dev/cli-shared-utils",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "rimraf build && rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "publishConfig": {
+    "registry": " https://registry.npmjs.org"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@wa/cli-service": "workspace:^1.0.0",
+    "@wa-dev/cli-service": "workspace:^1.0.0",
     "chalk": "4.1.1",
     "execa": "4.0.0",
     "fs-extra": "10.1.0",
