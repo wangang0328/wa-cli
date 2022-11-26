@@ -45,10 +45,12 @@ module.exports = class Generator {
       // );
       baseDir = path.resolve(
         __dirname,
-        "../../@wa/cli-service/generator/template"
+        "../../@wa-dev/cli-service/generator/template"
       );
     } else {
-      baseDir = path.resolve(`${this.context}/@wa/cli-service/package.json`);
+      baseDir = path.resolve(
+        `${this.context}/@wa-dev/cli-service/package.json`
+      );
     }
 
     const _files = await globby(["**"], { cwd: baseDir });

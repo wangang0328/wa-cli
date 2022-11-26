@@ -1,4 +1,4 @@
-const { warn, semver } = require("@wa/cli-shared-utils");
+const { warn, semver } = require("@wa-dev/cli-shared-utils");
 
 const isValidRange = (range) => {
   if (typeof range !== "string") {

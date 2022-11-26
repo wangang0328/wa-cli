@@ -14,7 +14,7 @@ const {
   log,
   loadModule,
   chalk,
-} = require("@wa/cli-shared-utils");
+} = require("@wa-dev/cli-shared-utils");
 const getVersions = require("../utils/get-versions");
 const path = require("path");
 
@@ -46,14 +46,14 @@ module.exports = class Creator extends EventEmitter {
 
     // 插件的注入逻辑， 确保cli-service脚手架的服务肯定可以注入
     preset = deepclone(preset);
-    preset.plugins["@wa/cli-service"] = Object.assign(
+    preset.plugins["@wa-dev/cli-service"] = Object.assign(
       {
         projectName: name,
       },
       preset
     );
 
-    // console.log("preset---", preset.plugins["@wa/cli-service"]);
+    // console.log("preset---", preset.plugins["@wa-dev/cli-service"]);
     // 设置包名、依赖, 将preset的依赖赋值给pkg，后续将pkg写入到package.json 文件
     // 抽离出@wa 开头的依赖，添加版本号，同时为后续解析插件做准备
     const deps = Object.keys(preset.plugins);
@@ -144,8 +144,8 @@ module.exports = class Creator extends EventEmitter {
   // { id: options } => [{ id, apply, options }]
   async resolvePlugins(rowPlugins) {
     // ensure cli-service is invoked first and sort
-    // 确保@wa/cli-service 插件是被正确添加进去的
-    rowPlugins = sortObject(rowPlugins, ["@wa/cli-service"], true);
+    // 确保@wa-dev/cli-service 插件是被正确添加进去的
+    rowPlugins = sortObject(rowPlugins, ["@wa-dev/cli-service"], true);
     // 缓存插件
     const plugins = [];
     // 遍历插件列表

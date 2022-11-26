@@ -1,4 +1,4 @@
-const { execa } = require("@wa/cli-shared-utils");
+const { execa } = require("@wa-dev/cli-shared-utils");
 const EventEmitter = require("events");
 
 // TODO: 确认其作用

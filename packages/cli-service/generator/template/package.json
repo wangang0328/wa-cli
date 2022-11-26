@@ -17,6 +17,6 @@
   "devDependencies": {
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
-    "@wa/cli-service": "~1.0.0"
+    "@wa-dev/cli-service": "@1.0.0"
   }
 }

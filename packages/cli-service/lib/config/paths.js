@@ -1,5 +1,5 @@
 const path = require("path");
-const { fs } = require("@wa/cli-shared-utils");
+const { fs } = require("@wa-dev/cli-shared-utils");
 
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);

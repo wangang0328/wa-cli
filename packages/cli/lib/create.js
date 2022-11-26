@@ -2,7 +2,7 @@ const path = require("path");
 const validateProjectName = require("validate-npm-package-name");
 const fs = require("fs-extra");
 const inquirer = require("inquirer");
-const { error, chalk } = require("@wa/cli-shared-utils");
+const { error, chalk } = require("@wa-dev/cli-shared-utils");
 
 const Creator = require("./generator/creator");
 

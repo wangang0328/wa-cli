@@ -1,4 +1,4 @@
-const { createSchema } = require("@wa/cli-shared-utils");
+const { createSchema } = require("@wa-dev/cli-shared-utils");
 
 exports.schema = createSchema((joi) =>
   joi.object({

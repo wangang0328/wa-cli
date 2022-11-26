@@ -6,7 +6,7 @@ const {
   chalk,
   clearConsole,
   openBrowser,
-} = require("@wa/cli-shared-utils");
+} = require("@wa-dev/cli-shared-utils");
 const prepareUrl = require("../utils/prepare-url");
 const paths = require("../config/paths");
 const baseConfig = require("../webpack.config");

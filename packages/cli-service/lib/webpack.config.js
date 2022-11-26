@@ -1,6 +1,6 @@
 const paths = require("./config/paths");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { getCssModuleLocalIdent } = require("@wa/cli-shared-utils");
+const { getCssModuleLocalIdent } = require("@wa-dev/cli-shared-utils");
 // 抽离css文件
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // 压缩css文件

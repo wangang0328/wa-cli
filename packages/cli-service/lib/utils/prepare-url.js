@@ -1,5 +1,5 @@
 const url = require("url");
-const { chalk } = require("@wa/cli-shared-utils");
+const { chalk } = require("@wa-dev/cli-shared-utils");
 const address = require("address");
 const defaultGateway = require("default-gateway"); // 默认网关
 

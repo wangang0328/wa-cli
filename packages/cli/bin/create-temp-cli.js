@@ -7,8 +7,8 @@ const fs = require("fs-extra");
 // console.log(slash(process.cwd()));
 if (
   slash(process.cwd()).indexOf("/packages/test") > 0 &&
-  (fs.existsSync(path.resolve(process.cwd()), "../@wa") ||
-    fs.existsSync(path.resolve(process.cwd(), "../../@wa")))
+  (fs.existsSync(path.resolve(process.cwd()), "../@wa-dev") ||
+    fs.existsSync(path.resolve(process.cwd(), "../../@wa-dev")))
 ) {
   process.env.WA_DEBUG = true;
 }
@@ -21,7 +21,9 @@ const program = new Command();
 
 program.version(packageJson.version);
 
-program.version(`@wa/cli ${packageJson.version}`).usage("<command> [options]");
+program
+  .version(`@wa-dev/cli ${packageJson.version}`)
+  .usage("<command> [options]");
 
 program
   .command("create <app-name>")
@@ -44,7 +46,7 @@ program
     // name 是create的 参数
     if (!minimist(process.argv.slice(3))._.length) {
       console.log(
-        "@wa/cli need a project name, place input your project name, check it by wa --help."
+        "@wa-dev/cli need a project name, place input your project name, check it by wa --help."
       );
       process.exit(1);
     }

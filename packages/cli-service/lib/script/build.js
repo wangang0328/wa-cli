@@ -6,7 +6,7 @@ const {
   stopSpinner,
   logWithSpinner,
   clearConsole,
-} = require("@wa/cli-shared-utils");
+} = require("@wa-dev/cli-shared-utils");
 const paths = require("../config/paths");
 const baseConfig = require("../webpack.config");
 

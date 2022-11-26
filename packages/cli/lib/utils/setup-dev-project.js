@@ -19,9 +19,9 @@ const linkBin = async (src, dest) => {
 
 const setupDevProject = (targetDir) => {
   // 在node_modules/.bin 生成wa-cli-service 和wa-cli-service.md
-  // require.resolve("@wa/cli-service/bin/wa-cli-service") 有软链
+  // require.resolve("@wa-dev/cli-service/bin/wa-cli-service") 有软链
   return linkBin(
-    require.resolve("@wa/cli-service/bin/wa-cli-service"),
+    require.resolve("@wa-dev/cli-service/bin/wa-cli-service"),
     path.join(targetDir, "node_modules", ".bin", "wa-cli-service")
   );
 };

@@ -1,6 +1,6 @@
 const path = require("path");
 const defaultsdeep = require("lodash.defaultsdeep");
-const { error, chalk } = require("@wa/cli-shared-utils");
+const { error, chalk } = require("@wa-dev/cli-shared-utils");
 const { schema, defaults } = require("./options");
 
 const loadOptions = (optionsPath, command) => {

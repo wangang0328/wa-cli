@@ -1,4 +1,4 @@
-const { semver } = require("@wa/cli-shared-utils");
+const { semver } = require("@wa-dev/cli-shared-utils");
 
 let sessionCached;
 
