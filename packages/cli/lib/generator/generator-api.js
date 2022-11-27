@@ -81,7 +81,5 @@ module.exports = class GeneratorApi {
         pkg[key] = value;
       }
     }
-
-    console.log(extendOptions);
   }
 };

@@ -36,24 +36,12 @@ module.exports = class Generator {
   async generate() {
     // 初始化构造器的时候，初始化插件
     this.initPlugins();
-
-    let baseDir = "";
-    if (process.env.WA_DEBUG) {
-      // baseDir = path.resolve(
-      //   __dirname,
-      //   "../../../cli-service/generator/template"
-      // );
-      baseDir = path.resolve(
-        __dirname,
-        "../../@wa-dev/cli-service/generator/template"
-      );
-    } else {
-      baseDir = path.resolve(
-        `${this.context}/@wa-dev/cli-service/package.json`
-      );
-    }
-
-    const _files = await globby(["**"], { cwd: baseDir });
+    const baseDir = path.resolve(
+      __dirname,
+      "../../node_modules/@wa-dev/cli-service/generator/template"
+    );
+    // dot: true 匹配以点开头的文件
+    const _files = await globby(["**"], { cwd: baseDir, dot: true });
     const filesContentTree = _files.reduce((content, sorucePath) => {
       content[sorucePath] = renderFile(path.resolve(baseDir, sorucePath));
       return content;

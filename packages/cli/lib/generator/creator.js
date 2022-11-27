@@ -60,7 +60,7 @@ module.exports = class Creator extends EventEmitter {
     deps.forEach((dep) => {
       pkg.devDependencies[dep] =
         preset.plugins[dep].version ||
-        (/^@wa/.test(dep) ? `~${latestMinor}` : "latest");
+        (/^@wa/.test(dep) ? `${latestMinor}` : "latest");
     });
 
     const pm = new PackageManager(context, { pkg });
