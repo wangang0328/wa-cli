@@ -1,6 +1,6 @@
 {
   "name": "@wa-dev/cli-service",
-  "version": "1.0.1",
+  "version": "2.0.0-beat.1",
   "description": "> TODO: description",
   "author": "ang <wang3ang@163.com>",
   "homepage": "http://index.js",
@@ -24,7 +24,7 @@
   },
   "types": "./lib/react-app.d.ts",
   "dependencies": {
-    "@wa-dev/cli-shared-utils": "workspace:^1.0.0",
+    "@wa-dev/cli-shared-utils": "workspace:^2.0.0-beat.0",
     "address": "^1.2.1",
     "default-gateway": "^6.0.3",
     "lodash.defaultsdeep": "^4.6.1",

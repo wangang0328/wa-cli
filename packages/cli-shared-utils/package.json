@@ -1,6 +1,6 @@
 {
   "name": "@wa-dev/cli-shared-utils",
-  "version": "1.0.1",
+  "version": "2.0.0-beat.1",
   "description": "",
   "main": "index.js",
   "scripts": {},
@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@wa-dev/cli-service": "workspace:^1.0.0",
+    "@wa-dev/cli-service": "workspace:^2.0.0-beat.0",
     "chalk": "4.1.1",
     "execa": "4.0.0",
     "fs-extra": "10.1.0",

@@ -1,0 +1,16 @@
+{
+  "mode": "pre",
+  "tag": "beat",
+  "initialVersions": {
+    "@wa-dev/cli": "1.0.1",
+    "@wa-dev/cli-service": "1.0.1",
+    "@wa-dev/cli-shared-utils": "1.0.1"
+  },
+  "changesets": [
+    "fluffy-countries-grab",
+    "happy-buttons-wash",
+    "kind-ladybugs-reflect",
+    "polite-moose-cheer",
+    "popular-kings-happen"
+  ]
+}
