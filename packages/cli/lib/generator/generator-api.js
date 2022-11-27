@@ -38,7 +38,6 @@ module.exports = class GeneratorApi {
    * @param {Object|Boolean} options
    */
   extendPackage(fields, options = {}) {
-    console.log("----------");
     const extendOptions = {
       merge: true,
       warnIncomplatiableVersions: true,

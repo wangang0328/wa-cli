@@ -153,8 +153,8 @@ module.exports = class Creator extends EventEmitter {
       // 相当于 require(`${id}/generator`) 每个子项目下面会有一个generator文件夹
       // generator/index.js 作为插件的入口， 所以加载入口模块
       // loadModule使用pnpm 报错找不到模块
-      // const apply = loadModule(`${id}/generator`, this.context) || (() => {});
-      const apply = require(`${id}/generator`) || (() => {});
+      // const apply = loadModule(`${id}/lib/generator`, this.context) || (() => {});
+      const apply = require(`${id}/lib/generator`) || (() => {});
 
       // id: 插件的id，apply 执行程序，配置项options
       plugins.push({ id, apply, options: value || {} });
