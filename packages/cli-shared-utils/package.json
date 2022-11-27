@@ -1,6 +1,6 @@
 {
   "name": "@wa-dev/cli-shared-utils",
-  "version": "2.0.0-beat.3",
+  "version": "2.0.0-beat.4",
   "description": "",
   "main": "index.js",
   "scripts": {},
@@ -10,6 +10,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "files": [
+    "lib",
+    "index.js",
+    "CHANGELOG.md"
+  ],
   "dependencies": {
     "@wa-dev/cli-service": "workspace:^2.0.0-beat.3",
     "chalk": "4.1.1",
