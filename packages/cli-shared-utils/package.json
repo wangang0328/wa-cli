@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf build && rollup -c",
     "preinstall": "npx only-allow pnpm"
   },
   "publishConfig": {
