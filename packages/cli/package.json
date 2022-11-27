@@ -1,6 +1,6 @@
 {
   "name": "@wa-dev/cli",
-  "version": "2.0.0-beat.1",
+  "version": "2.0.0-beat.2",
   "description": "> TODO: description",
   "author": "ang <wang3ang@163.com>",
   "homepage": "http://index.js",
@@ -23,9 +23,9 @@
     "test": "node ./__tests__/cli.test.js"
   },
   "dependencies": {
-    "@wa-dev/cli": "^2.0.0-beat.0",
-    "@wa-dev/cli-service": "workspace:^2.0.0-beat.0",
-    "@wa-dev/cli-shared-utils": "workspace:^2.0.0-beat.0",
+    "@wa-dev/cli": "^2.0.0-beat.2",
+    "@wa-dev/cli-service": "workspace:^2.0.0-beat.2",
+    "@wa-dev/cli-shared-utils": "workspace:^2.0.0-beat.2",
     "cmd-shim": "4.0.1",
     "commander": "^9.4.1",
     "deepmerge": "4.2.2",
