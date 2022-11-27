@@ -17,6 +17,11 @@
   "devDependencies": {
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
-    "@wa-dev/cli-service": "@1.0.0"
+    "@wa-dev/cli-service": "@1.0.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.5.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1"
   }
 }

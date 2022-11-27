@@ -10,7 +10,7 @@
   "fixed": [],
   "linked": [
     [
-      "@wa/*"
+      "@wa-dev/*"
     ]
   ],
   "access": "public",
