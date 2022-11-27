@@ -1,6 +1,6 @@
 {
   "name": "@wa-dev/cli-service",
-  "version": "2.0.0-beat.4",
+  "version": "2.0.0-beat.5",
   "description": "> TODO: description",
   "author": "ang <wang3ang@163.com>",
   "homepage": "http://index.js",
@@ -32,9 +32,7 @@
     "lodash.defaultsdeep": "^4.6.1",
     "minimist": "1.2.5",
     "webpack": "^5.75.0",
-    "webpack-merge": "^5.8.0"
-  },
-  "devDependencies": {
+    "webpack-merge": "^5.8.0",
     "@babel/core": "^7.20.2",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
