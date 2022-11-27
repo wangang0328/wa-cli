@@ -38,7 +38,7 @@ module.exports = class Generator {
     this.initPlugins();
     const baseDir = path.resolve(
       __dirname,
-      "../../node_modules/@wa-dev/cli-service/generator/template"
+      "../../node_modules/@wa-dev/cli-service/lib/generator/template"
     );
     // dot: true 匹配以点开头的文件
     const _files = await globby(["**"], { cwd: baseDir, dot: true });
