@@ -13,8 +13,11 @@ module.exports = (api) => {
     devDependencies: {
       "@types/react": "^18.0.25",
       "@types/react-dom": "^18.0.9",
-      // "@wa-dev/cli-service": "2.0.0-beat.5",
-      // typescript: "^4.9.3",
+      "eslint-config-standard": "^17.0.0",
+      "eslint-plugin-import": "^2.26.0",
+      "eslint-plugin-n": "^15.5.1",
+      "eslint-plugin-node": "^11.1.0",
+      "eslint-plugin-promise": "^6.1.1",
     },
     browserslist: [">1%", "not dead", "not op_mini all"],
   });
