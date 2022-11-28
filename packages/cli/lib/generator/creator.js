@@ -107,6 +107,7 @@ module.exports = class Creator extends EventEmitter {
     if (!process.env.WA_DEBUG) {
       await pm.install();
     }
+    clearConsole();
     // TODO: 根据命令来
     log(
       `🎉  Successfully created project ${chalk.yellow(this.projectName)}.\n`

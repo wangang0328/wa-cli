@@ -81,4 +81,14 @@ module.exports = class GeneratorApi {
       }
     }
   }
+
+  /**
+   * 设置基础信息
+   */
+  setBaseInfo(fields) {
+    const baseInfo = this.generator.baseInfo;
+    const toMerge = isFunction(fields) ? fields(pkg) : fields;
+    // TODO: 完善merge
+    Object.assign(baseInfo, toMerge);
+  }
 };

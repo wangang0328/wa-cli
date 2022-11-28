@@ -16,6 +16,7 @@
   "files": [
     "lib",
     "bin",
+    "generator",
     "CHANGELOG.md"
   ],
   "publishConfig": {

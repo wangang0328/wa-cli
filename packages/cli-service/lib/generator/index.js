@@ -1,3 +1,4 @@
+const path = require("path");
 module.exports = (api) => {
   // TODO: 获取最新版本
   api.extendPackage({
@@ -12,9 +13,14 @@ module.exports = (api) => {
     devDependencies: {
       "@types/react": "^18.0.25",
       "@types/react-dom": "^18.0.9",
-      "@wa-dev/cli-service": "2.0.0-beat.5",
-      typescript: "^4.9.3",
+      // "@wa-dev/cli-service": "2.0.0-beat.5",
+      // typescript: "^4.9.3",
     },
     browserslist: [">1%", "not dead", "not op_mini all"],
+  });
+  api.setBaseInfo({
+    template: {
+      basePath: path.resolve(__dirname, "./template"),
+    },
   });
 };

@@ -21,12 +21,13 @@ module.exports = class Generator {
     this.plugins = plugins;
     this.pm = pm;
     this.depSources = {};
+    // 存储一些基本信息
+    this.baseInfo = {};
   }
 
   // 解析plugins
   async initPlugins() {
     for (const plugin of this.plugins) {
-      console.log("执行插件");
       const { id, apply, options } = plugin;
       const api = new GeneratorAPI(id, this, options);
       await apply(api, options);
@@ -36,10 +37,11 @@ module.exports = class Generator {
   async generate() {
     // 初始化构造器的时候，初始化插件
     this.initPlugins();
-    const baseDir = path.resolve(
-      __dirname,
-      "../../node_modules/@wa-dev/cli-service/lib/generator/template"
-    );
+    // const baseDir = path.resolve(
+    //   __dirname,
+    //   "../../node_modules/@wa-dev/cli-service/lib/generator/template"
+    // );
+    const baseDir = this.baseInfo.template?.basePath;
     // dot: true 匹配以点开头的文件
     const _files = await globby(["**"], { cwd: baseDir, dot: true });
     const filesContentTree = _files.reduce((content, sorucePath) => {

@@ -8,7 +8,9 @@ const PACKAGE_MANAGER_CONFIG = {
     upgrade: ["update", "--logevel", "error"],
   },
   pnpm: {
-    install: ["install", "--reporter", "silent", "--shamefully-hoist"],
+    // 第一个参数的意思是普通报错不显示，第二个参数是创建一个扁平node_modules 目录结构
+    // install: ["install", "--reporter", "silent", "--shamefully-hoist"],
+    install: ["install", "--shamefully-hoist"],
     add: ["install", "--reporter", "silent", "--shamefully-hoist"],
     upgrade: ["update", "--reporter", "silent"],
     remove: ["uninstall", "--reporter", "silent"],
@@ -24,8 +26,8 @@ module.exports = class PackageManager {
     this.bin = "pnpm";
   }
 
-  async runCommand(command, args) {
-    return await executeCommand(
+  runCommand(command, args) {
+    return executeCommand(
       this.bin,
       [...PACKAGE_MANAGER_CONFIG[this.bin][command], ...(args || [])],
       this.context
@@ -33,14 +35,14 @@ module.exports = class PackageManager {
   }
 
   install() {
-    this.runCommand("install");
+    return this.runCommand("install");
   }
 
   add(...packages) {
-    this.runCommand("add", packages);
+    return this.runCommand("add", packages);
   }
 
   remove(packageName) {
-    this.runCommand("remove", [packageName]);
+    return this.runCommand("remove", [packageName]);
   }
 };
