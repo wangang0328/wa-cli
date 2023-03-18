@@ -1,7 +1,10 @@
-'use strict';
+#! /usr/bin/env node
 
-module.exports = cli;
+module.exports = cli
 
 function cli() {
-    return "Hello from cli";
+	console.log('ee')
+	return 'Hello from cli'
 }
+
+cli()

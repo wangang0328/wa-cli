@@ -16,7 +16,6 @@
     "CHANGELOG.md"
   ],
   "dependencies": {
-    "@wa-dev/cli-service": "workspace:^2.0.0-beat.7",
     "chalk": "4.1.1",
     "execa": "4.0.0",
     "fs-extra": "10.1.0",

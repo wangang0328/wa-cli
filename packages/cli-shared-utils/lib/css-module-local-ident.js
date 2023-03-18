@@ -9,7 +9,7 @@ const getCssModuleLocalIdent = (
 ) => {
   // 判断当前是否以index.module.(less|css|scss|sass) 结尾，如果是使用folder name 否则使用file name
   const fileNameOrFolderName = context.resourcePath.match(
-    /\index.module.(css|less|sass|scss)$/
+    /index.module.(css|less|sass|scss)$/
   )
     ? "[folder]"
     : "[name]";
