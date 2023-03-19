@@ -24,6 +24,7 @@ const path = require('path')
 module.exports = class Creator extends EventEmitter {
 	constructor(projectName, context, promptModules) {
 		super()
+		console.log('projectName----------', projectName)
 		this.projectName = projectName
 		this.context = context
 		const featurePrompt = this.resolveFeaturePrompt()
@@ -98,7 +99,7 @@ module.exports = class Creator extends EventEmitter {
 			await this.run('git init')
 			// console.log("git 结束---");
 		}
-		clearConsole()
+		// clearConsole()
 		log(`⚙\u{fe0f}  Installing CLI plugins. This might take a while...`)
 		log()
 		// this.emit('creation', { event: 'plugins-install' })
@@ -128,6 +129,12 @@ module.exports = class Creator extends EventEmitter {
 		})
 		// 生成代码
 		generator.generate()
+
+		if (!process.env.WA_DEBUG) {
+			// 会重新执行安装，因为生成器可能会插入新的依赖
+			await pm.install()
+		}
+		// clearConsole()
 		return
 
 		generator.generate()

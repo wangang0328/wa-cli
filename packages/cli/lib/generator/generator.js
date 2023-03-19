@@ -29,6 +29,7 @@ module.exports = class Generator {
 		// 生成文件的中间件，每个插件都会向中间件里插入中间件，中间件会负责向this.files里写文件
 		this.fileMiddlewares = []
 		const cliService = plugins.find(({ id }) => id === '@wa-dev/cli-service')
+		// 预设配置
 		this.rootOptions = cliService.options
 
 		this.allPluginIds = [
@@ -39,18 +40,30 @@ module.exports = class Generator {
 
 	// 解析plugins
 	async initPlugins() {
+		const { rootOptions } = this
 		for (const plugin of this.plugins) {
 			const { id, apply, options } = plugin
-			const api = new GeneratorAPI(id, this, options)
-			await apply(api, options)
+			const api = new GeneratorAPI(id, this, options, rootOptions)
+			await apply(api, options, rootOptions)
 		}
 	}
 
+	async resolveFiles() {
+		const { files } = this
+		for (const middleware of this.fileMiddlewares) {
+			await middleware(files)
+		}
+	}
 	async generate() {
 		console.log('开始生成文件')
-		return
 		// 初始化构造器的时候，初始化插件
 		this.initPlugins()
+
+		await this.resolveFiles()
+		// 保存package.json 文件
+		this.files['package.json'] = JSON.stringify(this.pkg, null, 2) + os.EOL
+		await writeFileTree(this.context, this.files)
+		return
 		// const baseDir = path.resolve(
 		//   __dirname,
 		//   "../../node_modules/@wa-dev/cli-service/lib/generator/template"
