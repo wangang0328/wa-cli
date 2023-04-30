@@ -4,10 +4,14 @@ module.exports = (cli) => {
 		value: 'ts',
 		short: 'TS',
 		description: 'Add support for the TypeScript language',
-		link: 'https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript',
+		link: '',
 		plugins: ['typescript'],
 	})
+
 	cli.onPromptComplete((answers, options) => {
-		console.log(answers, options)
+		// if (answers.features.includes('ts')) {
+		// 	options.plugins['@vue/cli-plugin-typescript'] = {}
+		// }
+		// console.log(answers, options)
 	})
 }

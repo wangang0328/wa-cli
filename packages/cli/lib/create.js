@@ -17,7 +17,7 @@ const create = async (projectName, options) => {
 	const validatedResult = validateProjectName(projectName)
 
 	if (!validatedResult.validForNewPackages) {
-		// 包名不合法
+		// 项目名不合法
 		error(
 			`Invalid project name: "${chalk.green(projectName)}", fllow this resons:`,
 			'tag'
@@ -38,7 +38,7 @@ const create = async (projectName, options) => {
 		// 包名是否存在
 		const { ok } = await inquirer.prompt([
 			{
-				name: 'ok',
+				name: 'ok', // 存储当前输入的值
 				type: 'confirm',
 				message: `Target directory ${appDir} already exists. we will remove this directory, are you sure?`,
 			},
@@ -48,6 +48,7 @@ const create = async (projectName, options) => {
 		}
 		console.log(`\nRemove ${appDir}...`)
 		fs.removeSync(appDir)
+		console.log(`\nRemoved ${appDir}`)
 	}
 
 	const presetPromptModules = getPresetPromptModules()

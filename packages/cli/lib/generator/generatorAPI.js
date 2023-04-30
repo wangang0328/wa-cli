@@ -40,7 +40,7 @@ module.exports = class GeneratorApi {
 		this.rootOptions = rootOptions
 
 		this.pluginsData = generator.plugins
-			.filter(({ id }) => id !== `@vue/cli-service`)
+			.filter(({ id }) => id !== `@wa-dev/cli-service`)
 			.map(({ id }) => ({
 				name: getShortPluginId(id),
 			}))
@@ -70,7 +70,9 @@ module.exports = class GeneratorApi {
 			// 判断对象是否是一般对象，并且是依赖dep对象
 			if (
 				isPlainObject(value) &&
-				(key === 'dependencies' || key === 'devDependencies')
+				(key === 'dependencies' ||
+					key === 'devDependencies' ||
+					key === 'peerDependencies')
 			) {
 				// 如果是dependencies 对象 直接合并
 				pkg[key] = mergeDeps(
@@ -103,10 +105,13 @@ module.exports = class GeneratorApi {
 	 * @param {object} ejsOptions ejs 模板配置
 	 */
 	async render(source, additionalData = {}, ejsOptions = {}) {
+		// 获取插件的路径， 因为是插件调用了render 方法
 		const baseDir = extractCallDir()
 		if (isString(baseDir)) {
 			this._injectFileMiddleware(async (files) => {
+				// 资源的绝对路径
 				source = path.resolve(baseDir, source)
+				// 获取对应的匹配资源的文件
 				const globby = require('globby')
 				// dot: true 匹配以点开头的文件
 				const _files = await globby(['**/*'], { cwd: source, dot: true })

@@ -24,7 +24,6 @@ const path = require('path')
 module.exports = class Creator extends EventEmitter {
 	constructor(projectName, context, promptModules) {
 		super()
-		console.log('projectName----------', projectName)
 		this.projectName = projectName
 		this.context = context
 		const featurePrompt = this.resolveFeaturePrompt()
@@ -51,7 +50,6 @@ module.exports = class Creator extends EventEmitter {
 
 	async promptAndResolvePreset() {
 		const answers = await inquirer.prompt(this.resolveFinalPrompts())
-		console.log('answers:', answers)
 		const preset = cloneDeep(defaultPreset)
 		answers.features = answers.features || []
 		this.promptCompleteCbs.forEach((cb) => cb(answers, preset))
@@ -60,23 +58,44 @@ module.exports = class Creator extends EventEmitter {
 
 	async create(cliOptions) {
 		const preset = cloneDeep(await this.promptAndResolvePreset())
-		console.log(preset)
+		// 根据预设的配置，设置不同的 cli-service
+		if (preset.template === 'vue') {
+			preset.plugins['@wa-dev/cli-vue-template-plugin'] = {}
+			console.error('暂未实现vue的模板脚手架')
+			process.exit(1)
+		} else if (preset.template === 'react') {
+			preset.plugins['@wa-dev/cli-react-template-plugin'] = {}
+		}
+
+		if (preset.buildTool === 'webpack') {
+			preset.plugins['@wa-dev/cli-webpack-service'] = {}
+		} else if (preset.buildTool === 'vite') {
+			preset.plugins['@wa-dev/cli-vite-service'] = {}
+			console.error('暂时只支持webpack')
+			process.exit(1)
+		} else if (preset.buildTool === 'webpackAndVite') {
+			preset.plugins['@wa-dev/cli-vite-service'] = {}
+			preset.plugins['@wa-dev/cli-webpack-service'] = {}
+			console.error('暂时只支持webpack')
+			process.exit(1)
+		}
+		const { context, projectName } = this
 		// 生成package.json
 		// 插入核心
-		const { context, name } = this
-		preset.plugins['@wa-dev/cli-service'] = Object.assign(
-			{
-				projectName: name,
-			},
-			preset
-		)
+		// preset.plugins['@wa-dev/cli-service'] = Object.assign(
+		// 	{
+		// 		projectName,
+		// 	},
+		// 	preset
+		// )
 		const latestMinor = await getVersions()
 		const pkg = {
-			name,
+			name: projectName,
 			version: '0.0.1',
 			private: true,
 			devDependencies: {},
 			dependencies: {},
+			peerDependencies: {},
 		}
 		// 设置包名、依赖, 将preset的依赖赋值给pkg，后续将pkg写入到package.json 文件
 		// 抽离出@wa 开头的依赖，添加版本号，同时为后续解析插件做准备
@@ -84,6 +103,7 @@ module.exports = class Creator extends EventEmitter {
 			pkg.devDependencies[depName] =
 				version || (/^@wa-dev/.test(depName) ? `${latestMinor}` : 'latest')
 		})
+
 		const pm = new PackageManager(context, { pkg })
 		// 写入 package.json
 		await writeFileTree(context, {
@@ -94,10 +114,8 @@ module.exports = class Creator extends EventEmitter {
 		// 校验是否git初始化
 		const shouldInitGit = this.shouldInitGit(cliOptions)
 		if (shouldInitGit) {
-			// TODO: 动画
-			// console.log("git K开始");
+			log(`🗃  Initializing git repository...`)
 			await this.run('git init')
-			// console.log("git 结束---");
 		}
 		// clearConsole()
 		log(`⚙\u{fe0f}  Installing CLI plugins. This might take a while...`)
@@ -112,7 +130,15 @@ module.exports = class Creator extends EventEmitter {
 					'开启本地调试模式!\n'
 				)}`
 			)
-			await require('../utils/setupDevProject')(context)
+			const setupDevProject = require('../utils/setupDevProject')
+			if (preset.buildTool === 'webpack') {
+				await setupDevProject(context, 'cli-webpack-service')
+			} else if (preset.buildTool === 'vite') {
+				await setupDevProject(context, 'cli-vite-service')
+			} else if (preset.buildTool === 'webpackAndVite') {
+				await setupDevProject(context, 'cli-webpack-service')
+				await setupDevProject(context, 'cli-vite-service')
+			}
 		} else {
 			await pm.install()
 		}
@@ -120,13 +146,13 @@ module.exports = class Creator extends EventEmitter {
 		// 开始构造项目
 		log(`🚀  Invoking generators...`)
 		const plugins = await this.resolvePlugins(preset.plugins)
-		console.log('resolved plugins:', plugins)
 		const generator = new Generator(this.context, {
 			name: this.projectName, // 项目名称
 			pkg, // package.json 包
 			plugins, // 插件
 			pm, // PackageManager 包管理器实例
 		})
+
 		// 生成代码
 		generator.generate()
 
@@ -135,13 +161,6 @@ module.exports = class Creator extends EventEmitter {
 			await pm.install()
 		}
 		// clearConsole()
-		return
-
-		generator.generate()
-		if (!process.env.WA_DEBUG) {
-			await pm.install()
-		}
-		clearConsole()
 		// TODO: 根据命令来
 		log(`🎉  Successfully created project ${chalk.yellow(this.projectName)}.\n`)
 		log(`👉  Get started with the following commands:\n\n`)
@@ -194,16 +213,15 @@ module.exports = class Creator extends EventEmitter {
 		const plugins = []
 		// 遍历插件列表
 		Object.entries(rowPlugins).forEach(([id, value]) => {
-			let targetId = id
-			if (process.env.WA_DEBUG) {
-				targetId = targetId.replace(/^@wa-dev\//, '')
-			}
+			// let targetId = id
+			// if (process.env.WA_DEBUG) {
+			// 	targetId = targetId.replace(/^@wa-dev\//, '')
+			// }
 			// 相当于 require(`${id}/generator`) 每个子项目下面会有一个generator文件夹
 			// generator/index.js 作为插件的入口， 所以加载入口模块
 			// loadModule使用pnpm 报错找不到模块
 			// 为什么使用loadModule，因为要从安装cli的地方，去找到项目的plugin
 			const apply = loadModule(`${id}/generator`, this.context) || (() => {})
-			// const apply = require(`${id}/lib/generator`) || (() => {})
 
 			// id: 插件的id，apply 执行程序，配置项options
 			plugins.push({ id, apply, options: value || {} })

@@ -22,6 +22,7 @@ const program = new Command()
 
 // console.log(process.argv)
 
+// wa --version 时 显示
 program
 	.version(`@wa-dev/cli ${packageJson.version}`)
 	.usage('<command> [options]')
@@ -42,7 +43,7 @@ program
 	)
 	.option('-n, --no-git', 'Skip git initialization')
 	.option('--merge', 'Merge target directory if it exists')
-	.action((name, cmd) => {
+	.action((name, options) => {
 		// process.argv 是个数组，第一个是node的程序所在位置，第二个是所执行的文件
 		// name 是create的 参数
 		if (!minimist(process.argv.slice(3))._.length) {
@@ -55,7 +56,7 @@ program
 		if (process.argv.includes('-g') || process.argv.includes('--git')) {
 			options.forceGit = true
 		}
-		require('../lib/create')(name, cmd)
+		require('../lib/create')(name, options)
 	})
 
 // TODO: 做一些命令

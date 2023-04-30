@@ -1,7 +1,7 @@
 {
   "name": "@wa-dev/cli",
   "version": "2.0.0-beat.7",
-  "description": "> TODO: description",
+  "description": "Command line for build your project",
   "author": "ang <wang3ang@163.com>",
   "homepage": "http://index.js",
   "license": "MIT",
@@ -25,8 +25,6 @@
     "test": "node ./__tests__/cli.test.js"
   },
   "dependencies": {
-    "@wa-dev/cli": "^2.0.0-beat.7",
-    "@wa-dev/cli-service": "workspace:^2.0.0-beat.7",
     "@wa-dev/cli-shared-utils": "workspace:^2.0.0-beat.7",
     "cmd-shim": "4.0.1",
     "commander": "^9.4.1",
@@ -36,8 +34,13 @@
     "inquirer": "7.0.1",
     "isbinaryfile": "4.0.4",
     "lodash.clonedeep": "^4.5.0",
+    "lodash.merge": "^4.6.2",
     "minimist": "^1.2.7",
     "slash": "3.0.0",
     "validate-npm-package-name": "^5.0.0"
+  },
+  "devDependencies": {
+    "@wa-dev/cli-service": "workspace:^2.0.0-beat.7",
+    "@wa-dev/cli-webpack-service": "workspace:^2.0.0-beat.7"
   }
 }

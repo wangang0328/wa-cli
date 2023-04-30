@@ -1,6 +1,7 @@
 const { isBinaryFileSync } = require('isbinaryfile')
 const os = require('os')
 const path = require('path')
+const merge = require('lodash.merge')
 const globby = require('globby') // 查找加载文件
 const GeneratorAPI = require('./generatorAPI')
 const writeFileTree = require('../utils/writeFileTree')
@@ -28,10 +29,16 @@ module.exports = class Generator {
 		this.files = {}
 		// 生成文件的中间件，每个插件都会向中间件里插入中间件，中间件会负责向this.files里写文件
 		this.fileMiddlewares = []
-		const cliService = plugins.find(({ id }) => id === '@wa-dev/cli-service')
-		// 预设配置
-		this.rootOptions = cliService.options
+		const cliServiceOptions = plugins
+			.filter(({ id }) =>
+				['@wa-dev/cli-webpack-service', '@wa-dev/cli-vite-service'].includes(id)
+			)
+			.reduce((accOptions, current) => {
+				return merge(accOptions, current.options)
+			}, {})
 
+		// 预设配置
+		this.rootOptions = cliServiceOptions
 		this.allPluginIds = [
 			Object.keys(pkg.devDependencies),
 			...Object.keys(pkg.dependencies),
@@ -55,7 +62,6 @@ module.exports = class Generator {
 		}
 	}
 	async generate() {
-		console.log('开始生成文件')
 		// 初始化构造器的时候，初始化插件
 		this.initPlugins()
 
@@ -63,21 +69,5 @@ module.exports = class Generator {
 		// 保存package.json 文件
 		this.files['package.json'] = JSON.stringify(this.pkg, null, 2) + os.EOL
 		await writeFileTree(this.context, this.files)
-		return
-		// const baseDir = path.resolve(
-		//   __dirname,
-		//   "../../node_modules/@wa-dev/cli-service/lib/generator/template"
-		// );
-		const baseDir = this.baseInfo.template?.basePath
-		// dot: true 匹配以点开头的文件
-		const _files = await globby(['**'], { cwd: baseDir, dot: true })
-		const filesContentTree = _files.reduce((content, sorucePath) => {
-			content[sorucePath] = renderFile(path.resolve(baseDir, sorucePath))
-			return content
-		}, {})
-		// 保存package.json 文件
-		filesContentTree['package.json'] =
-			JSON.stringify(this.pkg, null, 2) + os.EOL
-		await writeFileTree(this.context, filesContentTree)
 	}
 }

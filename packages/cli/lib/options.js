@@ -18,3 +18,21 @@ exports.defaults = {
 		default: exports.defaultPreset,
 	},
 }
+
+// 共享cli-service 的包名，因为webpack，vite 是不同的cli-service
+const SharedData = {
+	SERVICE_PACKAGE_NAME: null,
+}
+
+/**
+ *
+ * @param {array} v cli service
+ */
+const setServicePackageName = (v) => {
+	SharedData.SERVICE_PACKAGE_NAME = v
+}
+
+const getServicePackageName = (v) => SharedData.SERVICE_PACKAGE_NAME
+
+exports.setServicePackageName = setServicePackageName
+exports.getServicePackageName = getServicePackageName

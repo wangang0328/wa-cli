@@ -71,11 +71,13 @@ exports.resolveModule = function (request, context) {
 
 // 加载模块
 exports.loadModule = function (request, context, forceClearCache = false) {
-	// createRequire doesn't work with jest mocked fs
-	// (which we used in tests for cli-service)
-	console.log(request, context)
 	if (process.env.WA_DEBUG) {
-		return require(request)
+		const reg = /^(.*)wa-cli\/packages/
+		const formatedPath = process.cwd().replace(/\\/g, '/')
+		return require(`${formatedPath.match(reg)[0]}${request.replace(
+			/^@wa-dev/,
+			''
+		)}`)
 	}
 
 	try {

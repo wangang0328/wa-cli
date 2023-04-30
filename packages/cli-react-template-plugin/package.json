@@ -1,0 +1,10 @@
+{
+  "name": "@wa-dev/cli-react-template-plugin",
+  "version": "1.0.0",
+  "description": "react template plugin for wa-cli",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "wa-cli-service start --pack=webpack",
-    "build": "wa-cli-service build --pack=vite"
+    "start": "wa-cli-service start",
+    "build": "wa-cli-service build"
   },
   "browserslist": [
     "> 1%",
