@@ -38,7 +38,7 @@ const baseConfig = (webpackEnv) => {
 				loader: require.resolve('postcss-loader'),
 				options: {
 					postcssOptions: {
-						plugins: ['autoprefix'], // 决定添加哪些浏览器的前缀到css中
+						// plugins: ['autoprefix'], // 决定添加哪些浏览器的前缀到css中
 					},
 				},
 			},
@@ -187,6 +187,9 @@ const baseConfig = (webpackEnv) => {
 			new HtmlWebpackPlugin({
 				template: paths.appHtml,
 				inject: true, // 自动注入静态资源
+				templateParameters: {
+					isVite: false,
+				},
 			}),
 			isEnvProduction &&
 				new MiniCssExtractPlugin({

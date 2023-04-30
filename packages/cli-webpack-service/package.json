@@ -56,7 +56,7 @@
     "mini-css-extract-plugin": "^2.7.0",
     "minimist": "1.2.5",
     "postcss": "^8.4.19",
-    "postcss-loader": "6.2.1",
+    "postcss-loader": "7.3.0",
     "progress-webpack-plugin": "^1.0.16",
     "resolve-url-loader": "^5.0.0",
     "style-loader": "^3.3.1",

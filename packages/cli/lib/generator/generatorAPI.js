@@ -107,7 +107,7 @@ module.exports = class GeneratorApi {
 	async render(source, additionalData = {}, ejsOptions = {}) {
 		// 获取插件的路径， 因为是插件调用了render 方法
 		const baseDir = extractCallDir()
-		if (isString(baseDir)) {
+		if (isString(source)) {
 			this._injectFileMiddleware(async (files) => {
 				// 资源的绝对路径
 				source = path.resolve(baseDir, source)
@@ -121,9 +121,12 @@ module.exports = class GeneratorApi {
 					files[rawPath] = content
 				}
 			})
+		} else if (isFunction(source)) {
+			this._injectFileMiddleware(source)
 		} else {
 			if (process.env.WA_DEBUG) {
-				console.log('暂时不支持source的参数类型', source)
+				console.log('暂时不支持source的参数类型: ', typeof source)
+				process.exit(1)
 			}
 		}
 	}
