@@ -1,6 +1,6 @@
 {
   "name": "@wa-dev/cli-react-template-plugin",
-  "version": "1.0.0",
+  "version": "2.0.0-beat.8",
   "description": "react template plugin for wa-cli",
   "main": "index.js",
   "scripts": {},

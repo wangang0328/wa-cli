@@ -58,26 +58,28 @@ module.exports = class Creator extends EventEmitter {
 
 	async create(cliOptions) {
 		const preset = cloneDeep(await this.promptAndResolvePreset())
+		const serviceOptions = Object.assign(
+			{
+				projectName: this.projectName,
+			},
+			preset
+		)
 		// 根据预设的配置，设置不同的 cli-service
 		if (preset.template === 'vue') {
-			preset.plugins['@wa-dev/cli-vue-template-plugin'] = {}
+			preset.plugins['@wa-dev/cli-vue-template-plugin'] = serviceOptions
 			console.error('暂未实现vue的模板脚手架')
 			process.exit(1)
 		} else if (preset.template === 'react') {
-			preset.plugins['@wa-dev/cli-react-template-plugin'] = {}
+			preset.plugins['@wa-dev/cli-react-template-plugin'] = serviceOptions
 		}
 
 		if (preset.buildTool === 'webpack') {
-			preset.plugins['@wa-dev/cli-webpack-service'] = {}
+			preset.plugins['@wa-dev/cli-webpack-service'] = serviceOptions
 		} else if (preset.buildTool === 'vite') {
-			preset.plugins['@wa-dev/cli-vite-service'] = {}
-			console.error('暂时只支持webpack')
-			process.exit(1)
+			preset.plugins['@wa-dev/cli-vite-service'] = serviceOptions
 		} else if (preset.buildTool === 'webpackAndVite') {
-			preset.plugins['@wa-dev/cli-vite-service'] = {}
-			preset.plugins['@wa-dev/cli-webpack-service'] = {}
-			console.error('暂时只支持webpack')
-			process.exit(1)
+			preset.plugins['@wa-dev/cli-vite-service'] = serviceOptions
+			preset.plugins['@wa-dev/cli-webpack-service'] = serviceOptions
 		}
 		const { context, projectName } = this
 		// 生成package.json

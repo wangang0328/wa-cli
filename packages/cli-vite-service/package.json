@@ -1,0 +1,36 @@
+{
+  "name": "@wa-dev/cli-vite-service",
+  "version": "2.0.0-beat.8",
+  "description": "local vite service for wa-cli projects",
+  "author": "ang <wang3ang@163.com>",
+  "homepage": "http://index.js",
+  "license": "MIT",
+  "main": "lib/service.js",
+  "bin": {
+    "wa-cli-vite-service": "bin/cli-service.js"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib",
+    "bin",
+    "generator",
+    "CHANGELOG.md"
+  ],
+  "publishConfig": {
+    "registry": " https://registry.npmjs.org"
+  },
+  "scripts": {
+    "test": "node ./__tests__/cli-service.test.js"
+  },
+  "types": "./lib/react-app.d.ts",
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "@wa-dev/cli-shared-utils": "workspace:^2.0.0-beat.8",
+    "lodash.defaultsdeep": "^4.6.1",
+    "vite": "^4.3.2",
+    "vite-plugin-html": "^3.2.0"
+  }
+}
