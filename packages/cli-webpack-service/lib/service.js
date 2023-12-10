@@ -1,6 +1,6 @@
 const path = require("path");
 const defaultsdeep = require("lodash.defaultsdeep");
-const { error, chalk } = require("@wa-dev/cli-shared-utils");
+const { error, chalk, warn } = require("@wa-dev/cli-shared-utils");
 const { schema, defaults } = require("./options");
 
 const loadOptions = (optionsPath, command) => {
@@ -55,7 +55,7 @@ module.exports = class Service {
       const msg = validateError.details
         ? validateError.details.map((e) => `${e.message}\n`).join("")
         : "";
-      error(`${chalk.bold("wa.config.js")} options is error: \n${msg}`);
+      warn(`${chalk.bold("wa.config.js")} options is error: \n${msg}`);
     }
 
     return targetOptions;

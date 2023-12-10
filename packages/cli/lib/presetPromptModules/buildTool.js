@@ -9,7 +9,7 @@ module.exports = (cli) => {
 		type: 'list',
 		choices: [
 			{
-				name: 'Use webpack in production, use vite in development',
+				name: 'Use [webpack] in production, use [vite] in development',
 				value: 'webpackAndVite',
 			},
 			{

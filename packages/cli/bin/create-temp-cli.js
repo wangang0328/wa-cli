@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-const slash = require('slash') // 处理路径 斜杠和反斜杠
+const slash = require('slash') // 统一处理路径 斜杠和反斜杠
 const path = require('path')
 const fs = require('fs-extra')
 
@@ -11,6 +11,7 @@ if (
 	(fs.existsSync(path.resolve(process.cwd()), './@wa-dev') ||
 		fs.existsSync(path.resolve(process.cwd(), '../@wa-dev')))
 ) {
+	// 判断当前是否开发测试
 	process.env.WA_DEBUG = true
 }
 
@@ -25,7 +26,7 @@ const program = new Command()
 // wa --version 时 显示
 program
 	.version(`@wa-dev/cli ${packageJson.version}`)
-	.usage('<command> [options]')
+	.usage('<command> [options]') // usage 修改帮助信息的首行提示
 
 program
 	.command('create <app-name>')
@@ -46,6 +47,7 @@ program
 	.action((name, options) => {
 		// process.argv 是个数组，第一个是node的程序所在位置，第二个是所执行的文件
 		// name 是create的 参数
+		// _ 放的是没有关联选项参数的
 		if (!minimist(process.argv.slice(3))._.length) {
 			console.log(
 				'@wa-dev/cli need a project name, place input your project name, check it by wa --help.'
@@ -64,6 +66,5 @@ program
 	.command('add', 'add module to exist project')
 	.command('delete', 'delete a module from project')
 	.command('list', 'list all the modules')
-
 // 解析命令行参数
 program.parse(process.argv)

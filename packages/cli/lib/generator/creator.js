@@ -22,6 +22,12 @@ const getVersions = require('../utils/get-versions')
 const path = require('path')
 
 module.exports = class Creator extends EventEmitter {
+	/**
+	 *
+	 * @param {string} projectName 项目名字
+	 * @param {string} context 项目的绝对路径
+	 * @param {Function[]} promptModules 插入的弹出框配置选项的函数
+	 */
 	constructor(projectName, context, promptModules) {
 		super()
 		this.projectName = projectName
@@ -39,6 +45,7 @@ module.exports = class Creator extends EventEmitter {
 		promptModules.forEach((cb) => cb(promptAPI))
 	}
 
+	// 汇总所有的弹窗
 	resolveFinalPrompts() {
 		const finalPrompts = [
 			...this.presetPrompts,
@@ -64,6 +71,7 @@ module.exports = class Creator extends EventEmitter {
 			},
 			preset
 		)
+
 		// 根据预设的配置，设置不同的 cli-service
 		if (preset.template === 'vue') {
 			preset.plugins['@wa-dev/cli-vue-template-plugin'] = serviceOptions

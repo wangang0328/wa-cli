@@ -3,6 +3,7 @@ module.exports = (api, options, rootOptions) => {
 		api.extendPackage({
 			scripts: {
 				build: 'wa-cli-webpack-service build',
+				'start:webpack': ''
 			},
 		})
 	} else {

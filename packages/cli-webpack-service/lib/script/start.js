@@ -25,19 +25,19 @@ process.env.NODE_ENV = 'development'
 const setup = (userOptions) => {
 	// 清空build文件
 	fs.emptyDirSync(paths.appBuild)
-
-	const webpackConfig = merge(baseConfig('development'), userOptions)
+	const { devServer, ...restOptions } = userOptions
+	const webpackConfig = merge(baseConfig('development'), restOptions)
 
 	// TODO: 拿配置文件的devServer， 没有使用默认的
-	const protocol = serverConfig.https ? 'https' : 'http'
-	const host = serverConfig.host
-	const port = serverConfig.port
+	const finalServerConfig = Object.assign(serverConfig, devServer || {})
+	const protocol = finalServerConfig.https ? 'https' : 'http'
+	const host = finalServerConfig.host
+	const port = finalServerConfig.port
 	const urls = prepareUrl(protocol, host, port)
 
 	const compiler = webpack(webpackConfig)
-	let devServer
 	try {
-		devServer = new WebpackDevServer(serverConfig, compiler)
+		devServer = new WebpackDevServer(finalServerConfig, compiler)
 	} catch (error) {
 		console.log(error)
 	}

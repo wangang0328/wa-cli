@@ -1,0 +1,23 @@
+{
+  "name": "test-cli-demo",
+  "version": "0.0.0",
+  "private": true,
+  "devDependencies": {
+    "@wa-dev/cli-service": "2.0.0-beat.3",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9"
+  },
+  "scripts": {
+    "start": "wa-cli-service start",
+    "build": "wa-cli-service build"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browserslist": [
+    ">1%",
+    "not dead",
+    "not op_mini all"
+  ]
+}

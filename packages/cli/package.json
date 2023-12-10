@@ -1,6 +1,6 @@
 {
   "name": "@wa-dev/cli",
-  "version": "2.0.0-beat.8",
+  "version": "2.0.0-beat.9",
   "description": "Command line for build your project",
   "author": "ang <wang3ang@163.com>",
   "homepage": "http://index.js",
@@ -22,10 +22,10 @@
     "registry": " https://registry.npmjs.org"
   },
   "scripts": {
-    "test": "node ./__tests__/cli.test.js"
+    "test": "node bin/create-temp-cli.js"
   },
   "dependencies": {
-    "@wa-dev/cli-shared-utils": "workspace:^2.0.0-beat.8",
+    "@wa-dev/cli-shared-utils": "workspace:^2.0.0-beat.9",
     "cmd-shim": "4.0.1",
     "commander": "^9.4.1",
     "deepmerge": "4.2.2",
@@ -40,7 +40,7 @@
     "validate-npm-package-name": "^5.0.0"
   },
   "devDependencies": {
-    "@wa-dev/cli-service": "workspace:^2.0.0-beat.8",
+    "@wa-dev/cli-service": "workspace:^2.0.0-beat.9",
     "@wa-dev/cli-webpack-service": "workspace:^2.0.0-beat.8",
     "@wa-dev/cli-vite-service": "workspace:^2.0.0-beat.8"
   }

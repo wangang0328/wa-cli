@@ -1,5 +1,17 @@
 # @wa-dev/cli-shared-utils
 
+## 2.0.0-beat.9
+
+### Major Changes
+
+- 11a0260: fix: add eslint dependencies
+- 56756c9: test lost folder
+- 2650d71: fix template path error
+- 064a9a3: change devDependencies to dependencies
+- 3d3b2af: fix folder lost
+- 11a0260: fix some bugs
+- d3b1ca9: test fix miss webpack-dev-server
+
 ## 2.0.0-beat.0
 
 ### Major Changes

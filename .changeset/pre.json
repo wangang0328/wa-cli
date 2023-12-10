@@ -4,13 +4,23 @@
   "initialVersions": {
     "@wa-dev/cli": "1.0.1",
     "@wa-dev/cli-service": "1.0.1",
-    "@wa-dev/cli-shared-utils": "1.0.1"
+    "@wa-dev/cli-shared-utils": "1.0.1",
+    "@wa-dev/cli-react-template-plugin": "2.0.0-beat.8",
+    "@wa-dev/cli-vite-service": "2.0.0-beat.8",
+    "@wa-dev/cli-webpack-service": "2.0.0-beat.8"
   },
   "changesets": [
+    "brown-walls-eat",
+    "chilled-berries-smell",
+    "clever-clocks-return",
     "fluffy-countries-grab",
+    "good-houses-complain",
     "happy-buttons-wash",
+    "hot-rings-applaud",
     "kind-ladybugs-reflect",
     "polite-moose-cheer",
-    "popular-kings-happen"
+    "popular-kings-happen",
+    "smooth-dingos-brush",
+    "violet-buttons-change"
   ]
 }

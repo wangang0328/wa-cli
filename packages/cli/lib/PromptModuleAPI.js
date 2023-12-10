@@ -7,7 +7,10 @@ class PromptModuleAPI {
 		this.creator.presetPrompts.push(presetPrompt)
 	}
 
-	injectFeature(feature) {
+	/**
+	 * 插入特性
+	 */
+	injectFeature (feature) {
 		this.creator.featurePrompt.choices.push(feature)
 	}
 
@@ -24,7 +27,8 @@ class PromptModuleAPI {
 		}
 	}
 
-	onPromptComplete(cb) {
+	onPromptComplete (cb) {
+		// 完成弹窗后的回调
 		this.creator.promptCompleteCbs.push(cb)
 	}
 }
